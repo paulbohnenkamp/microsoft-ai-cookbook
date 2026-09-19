@@ -45,7 +45,7 @@ The departments do not imply six Teams, SharePoint sites, Forms, datasets, or wo
 
 ## Why IT comes first
 
-The first learning arc uses a deliberately small internal IT service request. IT provides a recognizable business problem while allowing the reader to learn Microsoft Forms, Power Automate, SharePoint, OneDrive, Teams, and Adaptive Cards one capability at a time.
+The first learning arc uses a deliberately small internal IT service request. IT provides a recognizable business problem while allowing the reader to learn Microsoft Forms, Power Automate, SharePoint, Teams, and Adaptive Cards one capability at a time. File handling is introduced later when the request includes a meaningful supporting file.
 
 The proposed first Form is **Northstar IT Service Request** with only these fields:
 
@@ -116,7 +116,7 @@ The foundation establishes boundaries; recipes add resources only when they are 
 
 ### Microsoft 365 and Power Platform
 
-Early recipes progressively add the Northstar Form, Power Automate flows, SharePoint site and list, OneDrive folders and files, Microsoft Team and channels, and Adaptive Cards.
+Early recipes progressively add the Northstar Form, Power Automate flows, SharePoint site and list, Microsoft Team and channels, and Adaptive Cards. A later file-handling recipe will add only the Microsoft 365 storage or handling behavior that the actual Forms upload scenario requires; it must not assume OneDrive is the final destination in advance.
 
 ### Application integration and identity
 
@@ -134,7 +134,7 @@ A shared Northstar resource is intentionally reused by multiple recipes. Possibl
 
 A recipe-specific resource exists only to teach or support one recipe and should stay beside that recipe where practical. Do not make every resource globally shared merely because another recipe could theoretically reuse it.
 
-## Proposed Stage 1 resource names
+## Proposed resource names
 
 These names are a consistency proposal, not a request to create all resources now:
 
@@ -143,11 +143,10 @@ These names are a consistency proposal, not a request to create all resources no
 | Microsoft Form | `Northstar IT Service Request` |
 | SharePoint site | `Northstar` |
 | SharePoint list | `IT Service Requests` |
-| OneDrive folder | `Microsoft AI Cookbook/IT Service Requests/` |
 | Microsoft Team | `Northstar` |
 | Teams channels | `General`; `IT Service Requests` |
 
-Create each resource at the point in the learning sequence where it becomes useful.
+Create each resource at the point in the learning sequence where it becomes useful. Add a file-storage destination only when the later supporting-file recipe establishes that it is the appropriate destination.
 
 ## Hands-on verification
 

@@ -11,6 +11,8 @@ Build the cookbook as a sequence of small, practical learning artifacts for appl
 - Keep one significant new concept in each normal recipe. Put composition into explicitly named “Putting It Together” recipes, which should introduce little new technology.
 - Follow the progression in `ROADMAP.md`; do not use the conceptual TOC in `README.md` as an implementation queue.
 - When a workflow crosses an important application or storage boundary, shape external input into a clear internal representation first if that improves clarity, consistency, or maintainability. Keep the representation small, and do not add schemas or abstraction layers without a concrete need.
+- Distinguish requester-supplied data, system-generated identity and timestamps, and support-managed operational data when evolving a business record. Keep those categories separate unless a concrete workflow requirement justifies combining them.
+- Prefer deterministic queries and reporting for structured business questions. Use AI later for interpretation, summarization, or suggestions when those capabilities add value; do not add runtime AI merely because the cookbook concerns AI.
 - Explain the business problem before the build. Keep the example practical, reproducible, and understandable.
 - Use Northstar only as lightweight context. Do not turn it into an application architecture, full domain model, or copied version of another project.
 
@@ -18,6 +20,7 @@ Build the cookbook as a sequence of small, practical learning artifacts for appl
 
 - Explicitly decide why AI is involved. Prefer deterministic code, APIs, Microsoft Graph, SharePoint operations, Power Automate expressions, database queries, or workflow rules when they solve the problem better.
 - Do not introduce an agent when a simple workflow is sufficient.
+- Do not introduce a Microsoft service merely to demonstrate that the service exists. Introduce it when the recipe's business problem gives the reader a meaningful reason to use it.
 - When a Microsoft product name, capability, SDK, agent framework, or recommended approach may have changed, verify it against current official Microsoft documentation before documenting it as guidance. Record the relevant source near the recipe when useful.
 - Keep identity, authorization, sensitive data, content safety, error handling, cost, and latency considerations proportional to the example, but do not hide important boundaries.
 
