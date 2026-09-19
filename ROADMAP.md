@@ -13,8 +13,8 @@ Recipes then add Microsoft 365, Power Platform, identity, Azure, and AI resource
 ### Stage 1 — Microsoft business workflow fundamentals
 
 1. **Inspect a Microsoft Forms response in Power Automate** — learn a form trigger, response details, and run history.
-2. **Save a request to a SharePoint list** — learn a structured SharePoint destination and field mapping.
-3. **Normalize request data in a flow** — learn expressions and deliberate data shaping before storage.
+2. **Normalize request data in a flow** — learn how to shape a Forms response into a clear Northstar request representation before it crosses a storage boundary.
+3. **Save the normalized request to a SharePoint list** — learn how to persist the shaped request and map it to SharePoint columns.
 4. **Create an archive file in OneDrive** — learn file creation and a simple document boundary.
 5. **Post a simple notification to Teams** — learn a focused collaboration notification.
 6. **Display a request with a Teams Adaptive Card** — learn structured presentation of selected fields.
@@ -46,5 +46,7 @@ The order may change as recipes are implemented and validated. A future roadmap 
 ## Current status
 
 - Foundation: established
-- Recipe 001: authored; hands-on verification pending
+- Recipe 001: hands-on verified
+- Recipe 002: authored; hands-on verification pending
+- Recipe 003: not implemented
 - Putting It Together recipe: not started

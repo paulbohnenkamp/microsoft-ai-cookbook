@@ -10,6 +10,7 @@ Build the cookbook as a sequence of small, practical learning artifacts for appl
 - Implement only the requested recipe or repository task. Do not begin future recipes, expand the fictional enterprise, or add speculative infrastructure.
 - Keep one significant new concept in each normal recipe. Put composition into explicitly named “Putting It Together” recipes, which should introduce little new technology.
 - Follow the progression in `ROADMAP.md`; do not use the conceptual TOC in `README.md` as an implementation queue.
+- When a workflow crosses an important application or storage boundary, shape external input into a clear internal representation first if that improves clarity, consistency, or maintainability. Keep the representation small, and do not add schemas or abstraction layers without a concrete need.
 - Explain the business problem before the build. Keep the example practical, reproducible, and understandable.
 - Use Northstar only as lightweight context. Do not turn it into an application architecture, full domain model, or copied version of another project.
 
