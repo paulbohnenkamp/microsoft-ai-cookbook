@@ -133,7 +133,7 @@ prematurely.
 - Recipe 003: hands-on verified
 - Recipe 004: hands-on verified
 - Recipe 005: hands-on verified
-- Recipe 006: not authored
+- Recipe 006: authored; hands-on verification pending
 - Recipe 007: not authored
 - Recipe 008: not authored
 - Recipe 009: not authored
