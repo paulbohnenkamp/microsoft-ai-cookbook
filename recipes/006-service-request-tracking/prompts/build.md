@@ -1,7 +1,7 @@
 # Build Recipe 006 in the Northstar environment
 
-This is a future hands-on execution prompt. Do not execute it while
-authoring Recipe 006.
+This is the hands-on execution prompt for Recipe 006. Execute it only when
+Recipe 006 verification is explicitly requested.
 
 ## Goal
 
@@ -152,9 +152,34 @@ as presentation evidence.
 
 ## Documentation and stop condition
 
-Only after successful end-to-end verification, update this README and build
-prompt with observed action names, field behavior, expression behavior,
+After successful end-to-end verification, update this README and build prompt
+with observed action names, field behavior, expression behavior,
 authentication/permission issues, IDs, and results. Mark Recipe 006
 hands-on verified only when the full run, list item, and card are observed.
+
+## Observed verification
+
+The verified run reused the existing Northstar resources in
+`DecisionForge (default)`. The flow remained enabled and used these six
+actions: `When a new response is submitted`, `Get response details`,
+`Normalized Request`, `Create item`, `Update item`, and `Post card in a chat
+or channel`.
+
+- Forms response ID: `6`.
+- Flow run ID: `08584117661483007884209067484CU05`; status `Succeeded`.
+- SharePoint item ID: `4`; Create item returned HTTP 201 and Update item
+  returned HTTP 200.
+- Service Request ID: `SR-004`, using the authored `Create_item` ID
+  expression.
+- Test values: Taylor Morgan, Access, `I need access to the Finance project
+  SharePoint site.`, Urgent `No`.
+- Persisted defaults: Status `New`, Priority `Normal`; Assigned To and
+  Assigned Date blank. SharePoint `Created`: `2026-09-19T17:58:59Z`.
+- Teams posting: Flow bot -> Channel -> Northstar / IT Service Requests.
+  The card rendered all seven displayed fields, and the sender displayed as
+  `Workflows`.
+- During authentication, the existing browser sessions were preserved while
+  the work account completed sign-in to Forms. No secrets, tokens, or
+  connection strings were handled.
 
 Stop after the verification report. Do not create or start Recipe 007.

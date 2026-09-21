@@ -1,6 +1,6 @@
 # Recipe 006: Add service request tracking and management fields
 
-**Status:** authored; hands-on verification pending
+**Status:** hands-on verified
 
 ## Business problem
 
@@ -33,7 +33,7 @@ and Adaptive Cards.
 
 ## Prerequisites
 
-Recipes 001–005 are hands-on verified. The existing `Northstar IT Service
+Recipes 001–006 are hands-on verified. The existing `Northstar IT Service
 Request` form, Northstar flow, `Northstar` SharePoint site, `IT Service
 Requests` list, `Northstar` Team, and `IT Service Requests` channel are reused.
 
@@ -63,8 +63,8 @@ the following list fields:
 
 No custom Request Date column is added. SharePoint's existing `Created`
 metadata is the request date for this learning arc, avoiding duplicate data.
-These field types are an authored baseline and require hands-on confirmation
-against the current list UI and connector behavior.
+These field types were confirmed in the current list UI and connector
+behavior during hands-on verification.
 
 ## Service Request ID design
 
@@ -77,9 +77,9 @@ concat('SR-', formatNumber(outputs('Create_item')?['body/ID'], '000'))
 
 The zero-padded value is readable and deterministic. Persisting it costs an
 extra `Update item` action, but gives support, reporting, and later Teams cards
-a stable human-facing value without repeating the derivation. The expression,
-field mapping, and whether the current connector returns the expected ID must
-be verified hands-on.
+a stable human-facing value without repeating the derivation. The expression
+and field mapping were verified hands-on. The test run produced SharePoint
+item ID `4` and Service Request ID `SR-004`.
 
 ## Adaptive Card
 
@@ -90,14 +90,13 @@ wait. Preserve the existing card schema and only use the current supported
 Teams action.
 
 Recipe 005 observed a sender/display-name value resembling
-`botcards_sent_on_behalf_of_user_display_name`. The build prompt investigates
-the current supported posting identity and records what the actual Teams
-experience displays. It does not add a bot, Graph, or other workaround.
+`botcards_sent_on_behalf_of_user_display_name`. Recipe 006 verification
+recorded the current supported posting identity and actual Teams experience.
+It does not add a bot, Graph, or other workaround.
 
 ## Build steps
 
-Follow [`prompts/build.md`](prompts/build.md). It is an execution prompt for a
-future hands-on run; authoring this recipe does not execute it.
+Follow [`prompts/build.md`](prompts/build.md) for the hands-on execution.
 
 ## Security considerations
 
@@ -129,6 +128,34 @@ Expected normalized request:
 Record actual response, run, item, ID, timestamp, and rendered-card values;
 never predict them.
 
+## Hands-on verification
+
+Verification completed in `DecisionForge (default)` using the existing
+Northstar form, flow, SharePoint site/list, Team, and channel. No replacement
+resources were created.
+
+- Forms response ID: `6`.
+- Flow run ID: `08584117661483007884209067484CU05`.
+- The complete six-action run succeeded: Forms trigger, Get response details,
+  Normalized Request, Create item, Update item, and Post card in a chat or
+  channel.
+- `Normalized Request` produced the expected object with `isUrgent: false`.
+- SharePoint item ID: `4`.
+- Service Request ID: `SR-004`, produced by
+  `concat('SR-', formatNumber(outputs('Create_item')?['body/ID'], '000'))`.
+- Persisted values were Taylor Morgan, Access, `I need access to the Finance
+  project SharePoint site.`, Urgent `false`, Status `New`, and Priority
+  `Normal`.
+- SharePoint `Created` metadata was `2026-09-19T17:58:59Z`. No custom Request
+  Date column was added. Assigned To and Assigned Date remained blank.
+- The Teams action was configured as Flow bot -> Channel -> Northstar / IT
+  Service Requests. The rendered card visibly showed Request ID `SR-004`,
+  Taylor Morgan, Access, the submitted description, Urgent `No`, Status `New`,
+  and Priority `Normal`.
+- The current card displayed the sender as `Workflows`; the earlier
+  `botcards_sent_on_behalf_of_user_display_name` behavior was not present on
+  this verified card.
+
 ## Common failure cases
 
 - `Update item` needs the actual integer SharePoint item ID from Create item.
@@ -150,9 +177,8 @@ recipe and must not be started during authoring or verification of Recipe 006.
 
 ## Documentation status and references
 
-This README records an authored design, not observed hands-on behavior. The
-build run must distinguish Microsoft-documented connector behavior, behavior
-already observed in Recipes 001–005, and Recipe 006 behavior still pending.
+This README distinguishes authored design from observed hands-on behavior.
+Recipe 006 behavior is now verified in the real Northstar environment.
 
 - [SharePoint column formatting and supported field types](https://learn.microsoft.com/en-us/sharepoint/dev/declarative-customization/column-formatting)
 - [SharePoint field element types](https://learn.microsoft.com/en-us/sharepoint/dev/schema/field-element-list)

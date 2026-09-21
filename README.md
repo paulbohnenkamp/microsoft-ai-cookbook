@@ -108,4 +108,4 @@ Start with the recipes in `ROADMAP.md`. The early recipes establish Microsoft Fo
 - `sample-data/` contains only small fixtures needed by actual recipes.
 - `AGENTS.md` describes working conventions for contributors and coding agents.
 
-Recipes 001–005 are hands-on verified. The first pass establishes the foundation and learning sequence; Recipes 006–009 extend the Northstar service-request management arc before later application-integration and AI recipes.
+Recipes 001–006 are hands-on verified. The first pass establishes the foundation and learning sequence; Recipes 007–009 extend the Northstar service-request management arc before later application-integration and AI recipes.

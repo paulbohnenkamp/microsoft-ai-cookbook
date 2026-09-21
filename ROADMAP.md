@@ -50,7 +50,7 @@ The order may change as recipes are implemented and validated. A future roadmap 
 
 ## Northstar service-request design
 
-Recipes 001–005 establish the verified deterministic workflow:
+Recipes 001–006 establish the verified deterministic workflow:
 
 ```text
 Northstar IT Service Request
@@ -73,7 +73,7 @@ The normalized request remains small:
 }
 ```
 
-Recipe 006 should evolve the existing SharePoint-backed solution without
+Recipe 006 evolves the existing SharePoint-backed solution without
 retroactively changing that normalized object. It should distinguish three
 categories of data:
 
@@ -81,28 +81,28 @@ categories of data:
 - **System-generated data:** a persistent SharePoint item identity, a useful business-facing Service Request ID when justified, and Request Date.
 - **Support-managed data:** Status, Priority, Assigned To, and Assigned Date.
 
-Likely Recipe 006 operational fields are `Service Request ID`, `Request Date`,
-`Status`, `Priority`, `Assigned To`, and `Assigned Date`. Their exact types,
-defaults, and simplest implementation remain design candidates for Recipe 006
-authoring. If the SharePoint item ID provides a suitable deterministic basis
-for a human-facing identifier such as `SR-004`, prefer it over counters,
-GUIDs, custom databases, or other unnecessary infrastructure.
+Recipe 006 verified `Service Request ID`, `Status`, `Priority`, `Assigned To`,
+and `Assigned Date`. SharePoint's existing `Created` metadata is used as the
+request date; no duplicate Request Date column was added. The SharePoint item
+ID provides the deterministic human-facing identifier `SR-004` in the
+verified test.
 
 Keep **Urgent** as the requester's indication and **Priority** as a
 support/business assessment. Do not establish `Urgent = Yes -> Priority = High`
 as a durable rule in the roadmap, and do not add AI triage yet.
 
-Recipe 006 may extend the Teams Adaptive Card with a useful Service Request
-ID and selected tracking fields, but it should keep the card uncluttered. The
-verified Recipe 005 card behavior itself remains unchanged.
+Recipe 006 extends the Teams Adaptive Card with Service Request ID and
+selected tracking fields while keeping the card uncluttered. The verified
+card rendered Request ID, Employee, Request Type, Description, Urgent,
+Status, and Priority. The sender displayed as `Workflows` in the verified
+run.
 
 Recipe 005 also exposed a known Teams presentation issue: the card displayed a
 heading similar to `botcards_sent_on_behalf_of_user_display_name`. Recipe 006
-authoring should investigate current Teams connector, Power Automate, and
-Flow bot posting-identity behavior using official guidance. If a supported
-simple configuration cannot change it, document the product limitation rather
-than adding a workaround or infrastructure. This issue is not Recipe 006's
-primary learning objective.
+verification used the current Flow bot posting configuration and the new card
+displayed `Workflows`. If a future run exposes the earlier behavior again,
+document it rather than adding a workaround or infrastructure. This issue is
+not Recipe 006's primary learning objective.
 
 Recipe 007 should teach the request lifecycle, not an approval-card shortcut:
 identify an existing request, update operational fields, persist the changes,
@@ -133,7 +133,7 @@ prematurely.
 - Recipe 003: hands-on verified
 - Recipe 004: hands-on verified
 - Recipe 005: hands-on verified
-- Recipe 006: authored; hands-on verification pending
+- Recipe 006: hands-on verified
 - Recipe 007: not authored
 - Recipe 008: not authored
 - Recipe 009: not authored
