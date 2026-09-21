@@ -19,6 +19,8 @@ Build the cookbook as a sequence of small, practical learning artifacts for appl
 ## Choosing technology
 
 - Explicitly decide why AI is involved. Prefer deterministic code, APIs, Microsoft Graph, SharePoint operations, Power Automate expressions, database queries, or workflow rules when they solve the problem better.
+- Once a sufficient deterministic business foundation exists, introduce AI through a real business problem rather than adding unrelated platform prerequisites.
+- Keep AI interpretation and recommendations distinct from authoritative business state and actions; structured business questions remain deterministic.
 - Do not introduce an agent when a simple workflow is sufficient.
 - Do not introduce a Microsoft service merely to demonstrate that the service exists. Introduce it when the recipe's business problem gives the reader a meaningful reason to use it.
 - When a Microsoft product name, capability, SDK, agent framework, or recommended approach may have changed, verify it against current official Microsoft documentation before documenting it as guidance. Record the relevant source near the recipe when useful.

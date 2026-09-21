@@ -8,7 +8,7 @@ Complete [Northstar Environment Setup](docs/cookbook-environment.md) before begi
 
 Recipes then add Microsoft 365, Power Platform, identity, Azure, and AI resources progressively. They should reuse the established Northstar environment when a resource is intentionally shared, while keeping recipe-specific artifacts scoped to the recipe.
 
-## Initial learning sequence
+## Learning sequence
 
 ### Stage 1 — Microsoft business workflow and service-request management
 
@@ -20,37 +20,44 @@ Recipes then add Microsoft 365, Power Platform, identity, Azure, and AI resource
 6. **Add service request tracking and management fields** — distinguish requester-supplied data from system-generated identity and support-managed operational fields while evolving the existing SharePoint model.
 7. **Update and manage a service request** — find an existing request, update its operational state, persist the changes, and verify the lifecycle record.
 8. **Report on service requests** — answer deterministic business questions over structured request data and decide when reporting is sufficient without runtime AI.
-9. **Putting It Together: internal service request management** — compose intake, tracking, management, Teams presentation, and reporting into a coherent small enterprise workflow.
+### Stage 2 — Add AI to the existing business problem
 
-### Stage 2 — Enterprise application integration
+The deterministic foundation is now sufficient. Recipe 009 begins the first
+runtime-AI arc with the existing service-request description; the cookbook
+should not add unrelated Microsoft prerequisites before making that first
+model call.
 
-10. **Read a Microsoft 365 resource with Microsoft Graph** — learn a narrowly scoped REST API call.
-11. **Protect an application with Microsoft Entra ID** — learn sign-in and the boundary between authentication and authorization.
-12. **Add a supporting file to an IT service request** — learn the current Forms file-upload and Microsoft 365 storage/handling path when a request has a real supporting file such as a screenshot, PDF, or error document.
+9. **Classify a service request with Azure AI** — send an existing request description to an Azure-hosted model, inspect the classification, and compare it with the requester-selected Request Type without replacing that authoritative field.
+10. **Return structured AI output for a service request** — establish a small predictable output contract, validate it, and keep model output separate from authoritative business state.
+11. **Add AI-assisted service request triage** — use Description, Request Type, and Urgent to suggest a summary, classification, priority, or reason while preserving human and business authority.
+12. **Use a supporting file with an AI-assisted service request** — follow the actual current Forms and Microsoft 365 upload/storage path for a screenshot, PDF, or error document, then use relevant file content only where it helps the AI-assisted scenario.
 
-The file-handling recipe is intentionally later than the core intake workflow. It should follow the actual current Microsoft behavior for where Forms uploads are stored and how Power Automate accesses them; it must not assume that OneDrive is the final destination before that behavior is verified.
+Supporting files are placed after the first model call, structured output, and
+triage so the reader understands the AI boundary before adding another input
+type. Authoring must verify the current Microsoft storage and access path; it
+must not assume OneDrive or another destination in advance.
 
-### Stage 3 — Add AI
+13. **Retrieve relevant Northstar support knowledge with Azure AI Search** — introduce enterprise retrieval as a distinct capability that finds grounded support documentation for a request before combining retrieval with generation.
+14. **Read Microsoft 365 data with Microsoft Graph** — introduce Graph when the AI-enabled application needs Microsoft 365 data or actions that the existing connectors do not appropriately expose.
+15. **Protect the AI application with Microsoft Entra ID** — introduce sign-in, identity, and authorization before the application exposes protected data or business operations.
+16. **Give an AI application one deterministic service-request tool** — let the application retrieve a known request by Service Request ID while the tool remains authoritative for identity, authorization, validation, data access, and business rules.
+17. **Build a bounded AI-assisted service-request workflow** — combine interpretation, relevant retrieval, one deterministic lookup tool, and a proposed next step without creating a general autonomous agent.
+18. **Add human approval before an AI-assisted action** — place a human decision between an AI recommendation and a consequential deterministic update such as changing Priority or Status.
+19. **Evaluate the AI-assisted service-request feature** — use repeatable test cases, expected behavior, error analysis, structured evaluation, and regression checks against the known Northstar business scenario.
 
-13. **Call a model for a small classification task** — learn a model call and where deterministic rules remain preferable.
-14. **Request structured model output** — learn schema-constrained results and validation at the application boundary.
-15. **Search a small document collection with Azure AI Search** — learn retrieval as a separate capability before adding generation.
-16. **Give an application one business tool** — learn tool calling with a deterministic operation and explicit authorization.
-17. **Build a small agent workflow** — combine model output, retrieval, and one tool only where the workflow benefits from it.
-18. **Add human approval to an AI-assisted action** — learn how to place a human decision at the boundary before a consequential business action.
-19. **Evaluate an AI feature** — learn repeatable test cases, evaluation, and basic reliability analysis as a distinct capability.
+### Stage 3 — Combine
 
-### Stage 4 — Combine
+20. **Putting It Together: AI-assisted service request processing** — compose the verified Forms, Power Automate, SharePoint, Teams, tracking, lifecycle, and Power BI foundation with selective AI interpretation, structured output, relevant retrieval, a deterministic tool, human approval, and evaluation where justified.
 
-20. **Putting It Together: AI-assisted service request processing** — revisit the earlier deterministic service-request workflow and add AI selectively for classification or other useful assistance, with structured results and human approval where required.
-
-The final recipe is conceptual at this stage. It should not turn the workflow into an agent merely because AI is available.
+The final recipe should combine learned capabilities rather than introduce a
+large new platform. It should not turn the workflow into an agent merely
+because AI is available.
 
 The order may change as recipes are implemented and validated. A future roadmap revision should preserve the learning principle even if Microsoft product capabilities or recommended SDKs evolve. Recipe numbers represent the learning/build sequence, not the conceptual TOC chapters.
 
 ## Northstar service-request design
 
-Recipes 001–006 establish the verified deterministic workflow:
+Recipes 001–008 establish the verified deterministic workflow:
 
 ```text
 Northstar IT Service Request
@@ -110,20 +117,17 @@ and verify the stored record. Its trigger or user interface remains open for
 authoring; use the simplest meaningful Microsoft mechanism and do not assume
 Adaptive Card response actions are required.
 
-Recipe 008 should report over the accumulated structured request data. Useful
-questions include counts by status, priority, request type, urgency, or
-assignee, and distributions across those fields. Power BI is the leading
-candidate because reporting gives it a meaningful business reason, but it is
-not committed yet. Recipe 008 authoring should compare Power BI with
-SharePoint views or other current Microsoft reporting capabilities and avoid
-unnecessary licensing, capacity, or infrastructure.
+Recipe 008 establishes the deterministic-reporting boundary. Questions such
+as “How many Hardware requests were submitted?” or “How many requests are
+High priority?” remain structured-data questions for Power BI or another
+deterministic query. Questions such as “What kind of problem is this employee
+describing?” or “What recurring problems are employees describing?” interpret
+unstructured text and are the reason Recipe 009 begins the AI arc.
 
-Recipe 008 should make the deterministic-reporting boundary explicit. A
-question such as “How many Hardware requests were submitted?” is a structured
-data query and does not need runtime AI. Later questions such as summarizing
-recurring themes in free-text descriptions may justify AI. Recipes 006–009
-should create useful data for those future questions without adding runtime AI
-prematurely.
+The remaining sequence preserves this boundary: deterministic identity,
+authorization, persistence, reporting, and approved updates stay authoritative;
+AI is introduced for interpretation, classification, summarization, semantic
+retrieval, and bounded recommendations.
 
 ## Current status
 
@@ -136,5 +140,5 @@ prematurely.
 - Recipe 006: hands-on verified
 - Recipe 007: hands-on verified
 - Recipe 008: hands-on verified
-- Recipe 009: not authored
+- Recipe 009: planned; not authored
 - Recipes 010–020: planned; not authored

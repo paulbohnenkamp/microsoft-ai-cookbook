@@ -75,7 +75,7 @@ This is the cookbook's long-term conceptual map. It is not a commitment to imple
 
 The cookbook uses **Northstar**, a fictional mid-sized services company with six departments: Human Resources, Finance and Accounting, Marketing, Sales, Operations, and Information Technology. It uses Microsoft 365, Teams, SharePoint, OneDrive, Power Platform, Azure, and increasingly Microsoft AI capabilities. Northstar exists only to provide continuity between examples; it is not an application that the cookbook is trying to build.
 
-The first learning arc uses a small internal IT service request. It grows from capture and presentation into tracking, lifecycle management, and deterministic reporting before the cookbook adds later application-integration and AI capabilities. Examples may use employees, customers, service requests, invoices, documents, policies, contracts, and approvals, but each recipe keeps the scenario intentionally small.
+The first learning arc uses a small internal IT service request. It grows from capture and presentation into tracking, lifecycle management, and deterministic reporting. The next arc uses that verified business process to introduce runtime AI for interpretation, structured output, retrieval, bounded tools, human decisions, and evaluation. Examples may use employees, customers, service requests, invoices, documents, policies, contracts, and approvals, but each recipe keeps the scenario intentionally small.
 
 ## Getting Started
 
@@ -98,7 +98,7 @@ The inspection prompt is intentionally tool-agnostic. Different coding agents ma
 
 ## Suggested learning path
 
-Start with the recipes in `ROADMAP.md`. The early recipes establish Microsoft Forms, Power Automate, SharePoint, Teams, and Adaptive Cards one capability at a time, then evolve the request into a small managed system with tracking fields, updates, and reporting. File handling is introduced later, when an IT service request has a meaningful supporting file to store or process. Later recipes introduce Microsoft Graph, Entra ID, model calls, structured output, search, tool calling, simple agents, approval, and evaluation. The roadmap is a proposal and will evolve as the recipes are written.
+Start with the recipes in `ROADMAP.md`. Recipes 001–008 establish and verify the deterministic Microsoft business process before Recipe 009 makes the first real runtime model call against the existing request description. Later recipes introduce structured output, AI-assisted triage, supporting files, retrieval, Graph and Entra where the application needs them, deterministic tools, bounded agent behavior, human approval, and evaluation. The roadmap is a proposal and will evolve as the recipes are written.
 
 ## Repository guide
 
@@ -108,4 +108,4 @@ Start with the recipes in `ROADMAP.md`. The early recipes establish Microsoft Fo
 - `sample-data/` contains only small fixtures needed by actual recipes.
 - `AGENTS.md` describes working conventions for contributors and coding agents.
 
-Recipes 001–006 are hands-on verified. The first pass establishes the foundation and learning sequence; Recipes 007–009 extend the Northstar service-request management arc before later application-integration and AI recipes.
+Recipes 001–008 are hands-on verified. The deterministic foundation is complete; Recipe 009 is the next planned recipe and the first runtime-AI recipe. No runtime-AI recipe has been hands-on verified yet.
