@@ -1,6 +1,6 @@
 # Recipe 007: Update and manage a service request
 
-**Status:** authored; hands-on verification pending
+**Status:** hands-on verified
 
 ## Business problem
 
@@ -150,6 +150,35 @@ If `SR-004` is unavailable or has changed, inspect the difference. Do not
 reset legitimate data just to match this table. Select another suitable test
 record or create a fresh record through the already-verified Recipe 006 path
 only when a fresh lifecycle test is genuinely needed.
+
+## Hands-on verification
+
+The existing `Northstar` SharePoint site's `IT Service Requests` list was
+updated through the direct SharePoint item form. Before the lifecycle edit,
+the live `Priority` column was corrected in place from `Low`, `Normal`,
+`Choice 3` to `Low`, `Normal`, `High`; `SR-004` remained `New` with
+`Normal`. No list or column was recreated.
+
+The saved lifecycle update preserved the same item and produced these observed
+results:
+
+| Field | Before | After |
+| --- | --- | --- |
+| SharePoint item ID | `4` | `4` |
+| Service Request ID | `SR-004` | `SR-004` |
+| Employee Name | Taylor Morgan | Taylor Morgan |
+| Request Type | Access | Access |
+| Description | `I need access to the Finance project SharePoint site.` | unchanged |
+| Urgent | No | No |
+| Status | New | In Progress |
+| Priority | Normal | High |
+| Assigned To | blank | Paul Bohnenkamp |
+| Assigned Date | blank | `9/20/2026 6:44 PM` |
+
+The list displays dates in Pacific time (`UTC-08:00`). SharePoint metadata
+showed `Created` as `9/19/2026 10:58 AM`, `Modified` as `9/20/2026 6:45 PM`,
+and `Modified By` as Paul Bohnenkamp. The list still contained four items, so
+no duplicate was created. Requester-supplied data remained unchanged.
 
 ## Common failure cases
 

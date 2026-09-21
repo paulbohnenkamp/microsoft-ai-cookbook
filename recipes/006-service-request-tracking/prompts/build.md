@@ -52,6 +52,11 @@ normalized object, or unrelated resources. Do not begin Recipe 007.
 5. Confirm the Northstar Team and IT Service Requests channel.
 6. Confirm the current SharePoint connector exposes Create item and Update
    item, and the Teams connector exposes the current display-only card action.
+7. Inspect the live SharePoint `Priority` column definition and verify that
+   its configured Choice values are exactly `Low`, `Normal`, and `High`, with
+   default `Normal`. Do not verify this only through a saved item value; if
+   the configured choices differ, stop and correct the existing column before
+   continuing.
 
 ## Configure the list
 
@@ -175,6 +180,11 @@ or channel`.
   SharePoint site.`, Urgent `No`.
 - Persisted defaults: Status `New`, Priority `Normal`; Assigned To and
   Assigned Date blank. SharePoint `Created`: `2026-09-19T17:58:59Z`.
+- Follow-up schema verification found that the live `Priority` column had
+  `Low`, `Normal`, and unintended `Choice 3` values. The existing third choice
+  was corrected in place to `High`, then the column was reopened and verified
+  as exactly `Low`, `Normal`, and `High` with default `Normal`. SharePoint item
+  ID `4` and its existing `Normal` value were preserved.
 - Teams posting: Flow bot -> Channel -> Northstar / IT Service Requests.
   The card rendered all seven displayed fields, and the sender displayed as
   `Workflows`.

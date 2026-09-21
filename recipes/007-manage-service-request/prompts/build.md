@@ -126,6 +126,32 @@ around a minor UI difference.
 
 Stop after the verification report. Do not begin Recipe 008.
 
+## Observed verification
+
+The existing `Northstar` SharePoint site's `IT Service Requests` list was
+updated through the direct item form. The live `Priority` column was inspected
+before editing and contained `Low`, `Normal`, and unintended `Choice 3`. The
+existing third choice was corrected in place to `High`, and reopening the
+column definition verified exactly `Low`, `Normal`, and `High` with default
+`Normal`. Existing list items were preserved.
+
+For the lifecycle update, SharePoint item ID `4` and Service Request ID
+`SR-004` remained unchanged. The saved values were:
+
+- Employee Name: Taylor Morgan
+- Request Type: Access
+- Description: `I need access to the Finance project SharePoint site.`
+- Urgent: No
+- Status: In Progress
+- Priority: High
+- Assigned To: Paul Bohnenkamp
+- Assigned Date: `9/20/2026 6:44 PM` in the list's Pacific display time
+
+The observed standard metadata was `Created` `9/19/2026 10:58 AM`, `Modified`
+`9/20/2026 6:45 PM`, and `Modified By` Paul Bohnenkamp. The list still had four
+items, confirming that no duplicate was created. Requester-supplied data was
+unchanged. Recipe 007 is hands-on verified. Recipe 008 was not started.
+
 ## Completion report
 
 Report:

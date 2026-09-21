@@ -146,6 +146,10 @@ resources were created.
 - Persisted values were Taylor Morgan, Access, `I need access to the Finance
   project SharePoint site.`, Urgent `false`, Status `New`, and Priority
   `Normal`.
+- The live `Priority` column was later inspected directly and found to contain
+  `Low`, `Normal`, and an unintended `Choice 3` value. The existing third
+  choice was corrected in place to `High`; the existing item and its `Normal`
+  value were preserved.
 - SharePoint `Created` metadata was `2026-09-19T17:58:59Z`. No custom Request
   Date column was added. Assigned To and Assigned Date remained blank.
 - The Teams action was configured as Flow bot -> Channel -> Northstar / IT
@@ -159,6 +163,10 @@ resources were created.
 ## Common failure cases
 
 - `Update item` needs the actual integer SharePoint item ID from Create item.
+- Inspect the live Choice column definition and verify its exact configured
+  values (`Low`, `Normal`, `High`); confirming only that the field exists or
+  that a new item received the default `Normal` does not catch a malformed
+  choice.
 - Choice defaults or Person/Group behavior may differ in the current list UI.
 - A required field must not be filled with invented assignment data.
 - A malformed expression can produce an empty or unformatted request ID.
