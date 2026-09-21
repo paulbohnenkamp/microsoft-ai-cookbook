@@ -1,0 +1,17 @@
+{
+  "name": "northstar-recipe-009-classifier",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "classify": "tsx src/classify.ts"
+  },
+  "dependencies": {
+    "@azure/identity": "^4.10.0",
+    "openai": "^5.19.1",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.3",
+    "typescript": "^5.9.2"
+  }
+}

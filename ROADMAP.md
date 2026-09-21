@@ -140,5 +140,5 @@ retrieval, and bounded recommendations.
 - Recipe 006: hands-on verified
 - Recipe 007: hands-on verified
 - Recipe 008: hands-on verified
-- Recipe 009: planned; not authored
+- Recipe 009: authored; hands-on verification pending
 - Recipes 010–020: planned; not authored
