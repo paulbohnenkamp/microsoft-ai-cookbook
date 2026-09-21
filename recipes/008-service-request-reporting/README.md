@@ -1,6 +1,6 @@
 # Recipe 008: Report on service requests
 
-**Status:** authored; hands-on verification pending
+**Status:** hands-on verified
 
 ## Business problem
 
@@ -88,7 +88,8 @@ visuals:
 
 - SharePoint Choice fields must expose readable values for Request Type,
   Status, and Priority.
-- The Yes/No field must expose readable `Yes` and `No` values for Urgent.
+- The Yes/No field may be imported as Boolean `True` and `False`. In the
+  verified browser experience, `Urgent` was represented this way.
 - The Person or Group field Assigned To may expose a record, an email-shaped
   value, or a display name. This report does not use Assigned To in an
   aggregate visual, so no transformation is required for the selected design.
@@ -99,29 +100,35 @@ If the service exposes a field in a form that prevents the selected visuals
 from working, stop and record the observed behavior. Do not add a second data
 source or redesign the model during execution.
 
+During the verified exercise, SharePoint Choice fields imported as readable
+text values, `Urgent` imported as Boolean `True`/`False`, `Assigned Date`
+appeared as a Calendar/date field, and `Assigned To` appeared as a plain
+imported field without a Person-specific subtype exposed in the report pane.
+No Power Query transformation was required.
+
 ## Report design
 
 Create one report page named `Service request overview` with these visuals:
 
 | Visual | Fields | Business question |
 | --- | --- | --- |
-| Card | `Total Requests` | How many requests exist? |
-| Column chart | Status and count of Service Request ID | How many requests are in each status? |
-| Column chart | Priority and count of Service Request ID | How many requests are at each priority? |
-| Bar chart | Request Type and count of Service Request ID | What is the request-type distribution? |
-| Donut chart | Urgent and count of Service Request ID | How many requests are urgent? |
+| Card | Count of `ID` | How many requests exist? |
+| Column chart | Status and count of `ID` | How many requests are in each status? |
+| Column chart | Priority and count of `ID` | How many requests are at each priority? |
+| Bar chart | Request Type and count of `ID` | What is the request-type distribution? |
+| Donut chart | Urgent and count of `ID` | How many requests are urgent? |
 
 Add slicers for Status, Priority, and Request Type. Keep the page to these
 visuals and slicers. Do not add decorative charts.
 
-Create one explicit measure:
-
-```DAX
-Total Requests = COUNTROWS('IT Service Requests')
-```
-
-Use implicit counts of `Service Request ID` for the category visuals. Do not
-add calculated tables, relationships, time intelligence, or complex DAX.
+Use the simplest count aggregation available in the browser editor. The
+verified exercise used the imported numeric SharePoint `ID` field, which the
+browser exposed as `Count of ID`, rather than an explicit DAX measure. Do not
+add calculated tables, relationships, time intelligence, or complex DAX. The
+browser editing experience used here did not
+expose the required measure-creation option; introducing Power BI Desktop,
+licensing changes, a trial, or additional tooling solely to create one measure
+would violate KISS.
 
 ## Dataset
 
@@ -162,6 +169,38 @@ Compare the report with the live list. Verify the total and the counts for
 Status, Priority, Request Type, and Urgent. Open the source list and check
 several category counts by filtering or grouping. A report that renders is not
 enough evidence.
+
+### Verified results
+
+Power BI Service created the semantic model `Northstar IT Service Requests`
+in `My workspace`. The semantic-model details page displayed a regional
+browser limitation for opening the model, so the report was created through
+`My workspace > New report > Pick a published semantic model`. The imported
+table was named `table`. The saved report is `Northstar IT Service Request
+Reporting`, with a page named `Service request overview`.
+
+The browser editor's supported aggregation was `Count of ID`: Power BI
+automatically counted the numeric SharePoint item ID. The verified report
+matched the four existing SharePoint records:
+
+| Dimension | Observed counts |
+| --- | --- |
+| Total | 4 |
+| Status | New 3; In Progress 1 |
+| Priority | Normal 3; High 1 |
+| Request Type | Hardware 2; Software 1; Access 1 |
+| Urgent | True 2; False 2 |
+
+The Status slicer was tested with `In Progress`, reducing the report to one
+record (`High`, `Access`, `False`). The Priority slicer was tested with
+`High`, also reducing the report to one record. The Request Type slicer was
+tested with `Hardware`, reducing the report to two records (`Normal`, `New`,
+and `True` for both). Each slicer was cleared and the report returned to the
+baseline counts.
+
+The report-level refresh control was available and refreshed the saved report
+visuals without changing the source records. No gateway or scheduled refresh
+was configured.
 
 ## Security considerations
 
@@ -215,5 +254,7 @@ recipe.
 
 ## Documentation status
 
-Recipe 008 is authored from current Microsoft guidance and the verified
-Recipes 001–007 state. It has not been executed in the Northstar environment.
+Recipe 008 is hands-on verified from the existing SharePoint list through the
+Power BI Service report and slicer checks described above. No Power BI Pro,
+Premium Per User, Fabric trial, paid capacity, or other licensing capability
+was activated.

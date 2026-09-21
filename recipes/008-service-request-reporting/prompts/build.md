@@ -64,7 +64,13 @@ responses or create SharePoint items during this recipe.
 4. Review the displayed SharePoint source before continuing.
 5. Name the semantic model `Northstar IT Service Requests`.
 6. Save it in `My workspace`.
-7. Open the semantic model and choose the option to create a new report.
+7. Open the semantic model and create a report from it. If the semantic model
+   details page does not expose report creation, use the supported workspace
+   path **New report > Pick a published semantic model**, select
+   `Northstar IT Service Requests`, and continue in the browser editor.
+
+If the semantic model already exists from an earlier safe stop, reuse it rather
+than exporting the list again.
 
 Do not use Power BI Desktop. Do not use a CSV, Excel workbook, or another
 disconnected source.
@@ -78,7 +84,7 @@ representation and sample values for:
 - Status: Choice values.
 - Priority: Choice values. Confirm that `Low`, `Normal`, and `High` are
   available in the source data or report field.
-- Urgent: Yes and No values.
+- Urgent: the imported Boolean representation of Yes and No.
 - Assigned To: Person or Group representation.
 - Created and Assigned Date: Date and Time representation and timezone shown.
 
@@ -94,33 +100,34 @@ observed behavior.
 
 Create one page named `Service request overview`.
 
-Create this explicit measure:
-
-```DAX
-Total Requests = COUNTROWS('IT Service Requests')
-```
-
-Use the actual table name if Power BI preserves a different name for the
-imported SharePoint list. Record the observed name.
+Do not require an explicit DAX measure. Use the simplest supported count
+aggregation over the imported numeric SharePoint `ID` field for the total card
+and category visuals.
+The browser editing experience observed for this exercise did not expose the
+required measure-creation option. Do not introduce Power BI Desktop, a paid
+license, a trial, Fabric capacity, or another tool solely to create one
+measure.
 
 Add these visuals:
 
-1. A card using `Total Requests`.
+1. A card counting `ID`.
 2. A column chart with Status as the category and an implicit count of
-   `Service Request ID` as the value.
+   `ID` as the value.
 3. A column chart with Priority as the category and an implicit count of
-   `Service Request ID` as the value.
+   `ID` as the value.
 4. A bar chart with Request Type as the category and an implicit count of
-   `Service Request ID` as the value.
-5. A donut chart with Urgent as the category and an implicit count of
-   `Service Request ID` as the value.
+   `ID` as the value.
+5. A donut chart with Urgent as the category and a count of
+   `ID` as the value.
 
 Add slicers for Status, Priority, and Request Type. Do not add other visuals,
 calculated tables, relationships, time intelligence, or complex DAX.
 
 ## Refresh and reconcile the results
 
-1. Refresh the semantic model after the report is created.
+1. Use the available Power BI refresh control after the report is created.
+   Record whether it refreshes the semantic model or only refreshes report
+   visuals in the current browser experience.
 2. Record the actual total shown by the card.
 3. Record the actual category counts for Status, Priority, Request Type, and
    Urgent.
@@ -139,18 +146,29 @@ capability, the browser path requires paid licensing, or a field cannot be
 used as designed, stop. Do not purchase a license, start a trial, create
 capacity, switch to SharePoint-native reporting, or fabricate verification.
 
-If the report is stale, refresh the semantic model and repeat the source
+If the report is stale, use the supported refresh path and repeat the source
 comparison. Do not configure a gateway or scheduled refresh.
 
 ## Documentation and stop condition
 
 After successful verification, update this README and this build prompt with
 the observed Power BI navigation, semantic model name, table name, imported
-field representations, measure behavior, report counts, refresh behavior,
+field representations, aggregation behavior, report counts, refresh behavior,
 authentication or licensing issues, and source reconciliation results.
 
 Mark Recipe 008 hands-on verified only after the report and source counts
 match. Do not update Recipe 009 or begin the next recipe.
+
+The verified browser path used `My workspace > New report > Pick a published
+semantic model` because the semantic-model details page did not expose report
+creation in this region. The saved report used the existing
+`Northstar IT Service Requests` model, imported table `table`, page
+`Service request overview`, and the `Count of ID` aggregation. The report
+refresh control refreshed the visuals without source changes. The report and
+slicers matched the four-record SharePoint source: Status New 3/In Progress 1,
+Priority Normal 3/High 1, Request Type Hardware 2/Software 1/Access 1, and
+Urgent True 2/False 2. No Power BI or Fabric trial or paid capability was
+activated.
 
 Stop after the verification report.
 
@@ -167,7 +185,7 @@ Report:
   and Time fields.
 - Whether Power Query transformations were required.
 - The report page and visuals created.
-- The DAX measure created.
+- The aggregation used for the total instead of a DAX measure.
 - The slicers created.
 - The actual report counts.
 - The matching SharePoint source counts.

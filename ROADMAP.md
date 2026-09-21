@@ -135,6 +135,6 @@ prematurely.
 - Recipe 005: hands-on verified
 - Recipe 006: hands-on verified
 - Recipe 007: hands-on verified
-- Recipe 008: authored; hands-on verification pending
+- Recipe 008: hands-on verified
 - Recipe 009: not authored
 - Recipes 010–020: planned; not authored
